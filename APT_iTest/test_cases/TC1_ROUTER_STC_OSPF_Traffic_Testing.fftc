@@ -1,0 +1,555 @@
+<?xml version="1.0"?>
+<testCase version="8.1.3.0">
+    <execution>
+        <parameters version="8.1.3.0">
+            <parameters escape="true">
+                <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+                    <URL>https://10.62.224.11</URL>
+                </parameters>
+            </parameters>
+        </parameters>
+    </execution>
+    <procedures>
+        <item name="main">
+            <steps>
+                <item guid="d4feb75c-c699-4972-9dfd-248ff93b67d5" action="open" session="Cisco1">
+                    <command>
+                        <body>project://APT_iTest/session_profiles/CSR_Router.ffsp</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                            <promptProperties>
+                                <stepPrompts>
+                                    <item name="prompt1" MatchMethod="WILDCARD">
+                                        <Content>*&gt;</Content>
+                                    </item>
+                                    <item name="prompt2" MatchMethod="WILDCARD">
+                                        <Content>*#</Content>
+                                    </item>
+                                </stepPrompts>
+                                <alsoUseSessionPrompts inherit="false">false</alsoUseSessionPrompts>
+                            </promptProperties>
+                        </stepProperties>
+                        <sessionProperties type="com.fnfr.svt.applications.ssh.documents.SSHProperties">
+                            <ipAddress inherit="false">10.62.224.201</ipAddress>
+                            <user inherit="false">root</user>
+                        </sessionProperties>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="3df16f18-0443-464d-8fd7-04db3ebf5a35" action="command" session="Cisco1" normalOffset="4.373" estimatedStepExecutionTime="0.012" useFieldsInCommand="false">
+                    <command>
+                        <body>enable </body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <promptProperties>
+                            <stepPrompts>
+                                <item name="autoPrompt1">
+                                    <Content>Password: </Content>
+                                </item>
+                            </stepPrompts>
+                        </promptProperties>
+                    </applicationProperties>
+                </item>
+                <item guid="093e70bd-ff1e-4328-9137-88b756f09841" action="command" session="Cisco1" skip="true" normalOffset="2.815" estimatedStepExecutionTime="0.015" useFieldsInCommand="false">
+                    <command>
+                        <body masked="true">SrqvrrOjrgE=</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="9f9a7d3c-1d99-4c5f-837d-76471d12ac89" action="command" session="Cisco1">
+                    <command>
+                        <body>terminal length 0</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="2dc40e4d-4a57-4027-8f44-dd024ce848ab" action="open" session="STCv1" useFieldsInCommand="false">
+                    <command>
+                        <body>project://APT_iTest/session_profiles/STCv.ffsp</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.OpenStepPropertyGroup">
+                        <stepProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.svt.applications.spirent.testcenter.gui" transferableType="com.fnfr.itest.applications.spirent.testcenter.properties.TestCenterGUISessionProperties">
+                            <configureCustom16bitFilter transferableToolId="com.fnfr.svt.applications.spirent.testcenter.gui" transferableType="com.fnfr.itest.applications.spirent.testcenter.properties.Analyzer16BitFilterProperties" mask="ffff" mask.inherit="false" endOfRange="ffff" endOfRange.inherit="false"/>
+                        </sessionProperties>
+                        <sessionClass type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                        <sessionVersion type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                    </applicationProperties>
+                </item>
+                <item guid="35bc1ab2-8b21-4a7c-bd06-504e267fe39c" action="startArpNdOnAllDevices" session="STCv1">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="810fcae9-18dd-4622-b605-9d7498dea6a9" action="startDevices" session="STCv1" normalOffset="169.726" estimatedStepExecutionTime="1.093" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="70e3384b-5895-4637-a3ce-55a6232df5c9" action="showResults" session="STCv1" normalOffset="16.64" estimatedStepExecutionTime="0.093" useFieldsInCommand="false">
+                    <command>
+                        <body>Ospfv2Results &quot;OSPFv2&quot; 1</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>AdjacencyStatus(&quot;Port //1/1&quot;)</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == &quot;FULL&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Information">
+                                                    <message>Waiting for ROUTER Adjacency Status to be FULL</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="RepeatStep">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" maxRepeatCount="20" delayBetweenRepeats="10.0"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>AdjacencyStatus(&quot;Port //1/2&quot;)</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == &quot;FULL&quot;</expression>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="Information">
+                                                    <message>Waiting for ROUTER Adjacency Status to be FULL</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="RepeatStep">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.RepeatStepPropertyGroup" maxRepeatCount="20" delayBetweenRepeats="10.0"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <eventHandlers>
+                        <item name="OnRepeatStepMaxCountExceeded">
+                            <item actionId="DeclareExecutionIssue">
+                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                    <message>Waited for 200 Seconds ROUTER OSPF Adjecency not coming UP</message>
+                                </actionProperties>
+                            </item>
+                            <item actionId="FailTest">
+                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            </item>
+                            <item actionId="ExitExecution">
+                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                            </item>
+                        </item>
+                    </eventHandlers>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="e6c8bd79-4b84-4032-b7f7-5e3629331fe0" action="showResults" session="STCv1" normalOffset="16.64" estimatedStepExecutionTime="0.093" useFieldsInCommand="false">
+                    <command>
+                        <body>Ospfv2Results &quot;OSPFv2&quot; 1</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>AdjacencyStatus(&quot;Port //1/2&quot;)</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == &quot;FULL&quot;</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>Port1/2 Router OSPF &quot;State=Backup&quot; and &quot;Adjacency=FULL&quot;</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>Port1/2 Router OSPF &quot;Adjacency=DOWN&quot;</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>AdjacencyStatus(&quot;Port //1/1&quot;)</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == &quot;FULL&quot;</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>Port1/1 Router OSPF &quot;State=Backup&quot; and &quot;Adjacency=FULL&quot;</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>Port1/1 Router OSPF &quot;Adjacency=DOWN&quot;</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="cb367dc9-22d7-4d19-9b03-7c3851415ac7" action="command" session="Cisco1" normalOffset="53.464" estimatedStepExecutionTime="2.913" useFieldsInCommand="false">
+                    <command>
+                        <body>show ip ospf </body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="1.644" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="1ff17291-97d9-444a-abb0-29ea9001b3ed" action="command" session="Cisco1" normalOffset="5.316" estimatedStepExecutionTime="0.01" useFieldsInCommand="false">
+                    <command>
+                        <body>show ip ospf neighbor </body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>State_by_Neighbor_ID(&quot;192.0.0.1&quot;)</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == &quot;FULL/BDR&quot;</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>On Router OSPF Neighbor-192.0.0.1 is UP (FULL/BDR)</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>On Router OSPF Neighbor-192.0.0.1 is DOWN</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>State_by_Neighbor_ID(&quot;192.0.0.2&quot;)</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value == &quot;FULL/BDR&quot;</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>On Router OSPF Neighbor-192.0.0.2 is UP (FULL/BDR)</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>On Router OSPF Neighbor-192.0.0.2 is DOWN</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="regex">
+                                    <extractorProperties type="com.fnfr.svt.mapping.regex.extractors.RegexExtractorPropertyGroup" useLineMode="true">
+                                        <regex>^((\\d+\\.)+\\d+)\\s+\\d+\\s+(\\S+)\\s+\\S+\\s+((\\d+\\.)+\\d+)\\s+GigabitEthernet\\d+$</regex>
+                                        <extractionGroupIndex>3</extractionGroupIndex>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value eq &quot;FULL/BDR&quot;</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>OSPF IS UP</message>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>{auto_message_false}</message>
+                                                </actionProperties>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="39f16af4-66c7-4d74-b4cf-79664b4cb4cf" action="command" session="Cisco1" estimatedStepExecutionTime="0.01">
+                    <command>
+                        <body>clear counters</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.702" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="5c06a0f0-bb5d-4084-bccd-eb8589c3b4a0" action="command" session="Cisco1" estimatedStepExecutionTime="0.007">
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="f22f3e19-ae63-4c7c-9d8b-74770bd06a7a" action="startArpNdOnAllStreamBlocks" session="STCv1">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="80103b0a-987b-4cdf-bc74-aa73eae53611" action="startGenerator" session="STCv1" normalOffset="29.67" estimatedStepExecutionTime="0.672" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="777dfc0f-305f-40b5-baa8-743fb124091a" action="sleep">
+                    <command>
+                        <body>20</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="87cb9b4a-8f06-4354-b658-843872b5e2cc" action="stopGenerator" session="STCv1" normalOffset="3.419" estimatedStepExecutionTime="1.374" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="1f8f50d8-0337-4432-a88c-91b6711d6995" action="showResults" session="STCv1" normalOffset="26.709" estimatedStepExecutionTime="0.047" useFieldsInCommand="false">
+                    <command>
+                        <body>BasicTrafficResults &quot;Basic Counters&quot; 1</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="e400687f-6c73-4a1c-a23d-21209cee893e" action="clearResults" session="STCv1" normalOffset="2.774" estimatedStepExecutionTime="0.39" useFieldsInCommand="false">
+                    <command>
+                        <body>BasicTrafficResults</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="0269e52e-2159-4b15-bfc5-b372d3df0ca9" action="startGenerator" session="STCv1" normalOffset="4.842" estimatedStepExecutionTime="0.719" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="dab314e0-d2d1-4c22-b5fa-509119ecb485" action="sleep">
+                    <command>
+                        <body>30</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="26f34ff1-3288-461e-9691-48fa28b444bf" action="stopGenerator" session="STCv1" normalOffset="5.606" estimatedStepExecutionTime="1.641" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="cecc89ba-7b91-4efd-bed1-2865281d163e" action="sleep">
+                    <command>
+                        <body>5</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="321933f7-6985-46a5-815c-56eeefd87f30" action="showResults" session="STCv1" normalOffset="6.762" estimatedStepExecutionTime="0.047" useFieldsInCommand="false">
+                    <command>
+                        <body>BasicTrafficResults &quot;Basic Counters&quot; 1</body>
+                    </command>
+                    <postProcessing>
+                        <analysisRules>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>TotalTxCount_Frames_(&quot;Port //1/1&quot;)</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>TX1</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>TotalTxCount_Frames_(&quot;Port //1/2&quot;)</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="store">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.StoreProcessorPropertyGroup">
+                                        <storageLocation>TX2</storageLocation>
+                                        <responseValue type="com.fnfr.documents.PropertyBoolean">false</responseValue>
+                                        <variable type="com.fnfr.documents.PropertyBoolean">true</variable>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>TotalRxCount_Frames_(&quot;Port //1/1&quot;)</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value &gt;= $TX2</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>Port1/1 OSPF Traffic Stats Tx=Rx</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>Port1/1 OSPF Traffic Stats Tx!=Rx</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                            <item>
+                                <extractorInfo extractorType="query">
+                                    <extractorProperties type="com.fnfr.svt.mapping.execution.extractors.QueryDataExtractorPropertyGroup">
+                                        <query>TotalRxCount_Frames_(&quot;Port //1/2&quot;)</query>
+                                    </extractorProperties>
+                                </extractorInfo>
+                                <processorInfo ruleType="assert">
+                                    <ruleProperties type="com.fnfr.svt.execution.builtin.processors.AssertionPropertyGroup">
+                                        <expression>$value &gt;= $TX1</expression>
+                                        <actionsWhenTrue>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup" severity="OK">
+                                                    <message>Port1/2 OSPF Traffic Stats Tx=Rx</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="PassTestIfNotAlreadyFailed">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenTrue>
+                                        <actionsWhenFalse>
+                                            <item actionId="DeclareExecutionIssue">
+                                                <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
+                                                    <message>Port1/2 OSPF Traffic Stats Tx!=Rx</message>
+                                                </actionProperties>
+                                            </item>
+                                            <item actionId="FailTest">
+                                                <actionProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                                            </item>
+                                        </actionsWhenFalse>
+                                    </ruleProperties>
+                                </processorInfo>
+                            </item>
+                        </analysisRules>
+                    </postProcessing>
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="badbf3a8-18c0-48e9-86ac-7c4ff2c3d2e6" action="command" session="Cisco1" normalOffset="12.554" estimatedStepExecutionTime="1.569" useFieldsInCommand="false">
+                    <command>
+                        <body>show ip route ospf 1</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="1.564" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="58adad1e-b9a2-4a1f-844a-71b9e5991179" action="command" session="Cisco1" normalOffset="7.631" estimatedStepExecutionTime="1.039" useFieldsInCommand="false">
+                    <command>
+                        <body>show interfaces stats </body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="1.032" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="429ea264-edf1-43c1-a0ff-82ab1200f662" action="command" session="Cisco1" normalOffset="16.075" estimatedStepExecutionTime="0.01" useFieldsInCommand="false">
+                    <command>
+                        <body>show interfaces gigabitEthernet 2 accounting </body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="368c717a-30ea-4aff-a552-7e95bd08fd23" action="command" session="Cisco1" normalOffset="8.884" useFieldsInCommand="false">
+                    <command>
+                        <body>show interfaces gigabitEthernet 3 accounting</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.469" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="abb9cb3b-87aa-4048-af6d-34b09bc49bd3" action="command" session="Cisco1" normalOffset="16.075" estimatedStepExecutionTime="0.01" useFieldsInCommand="false">
+                    <command>
+                        <body>show interfaces gigabitEthernet 2 accounting </body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+                <item guid="7356f089-89df-4c88-88c8-ca1817903b31" action="command" session="Cisco1" normalOffset="8.884" useFieldsInCommand="false">
+                    <command>
+                        <body>show interfaces gigabitEthernet 3 accounting</body>
+                    </command>
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties">
+                        <completionProperties expectedIdleTime="0.469" expectedIdleTime.inherit="false"/>
+                    </applicationProperties>
+                </item>
+                <item guid="2b1b045b-d11a-48b7-b4e3-4766d9a76d84" action="close" session="STCv1" normalOffset="325.046" useFieldsInCommand="false">
+                    <applicationProperties type="com.fnfr.svt.documents.EmptyPropertyGroup"/>
+                </item>
+                <item guid="cb8fa3f7-747e-41eb-9e31-1bc7bcf6640a" action="close" session="Cisco1" normalOffset="10.046">
+                    <applicationProperties type="com.fnfr.svt.editors.terminal.documents.StepDefaultProperties"/>
+                </item>
+            </steps>
+        </item>
+    </procedures>
+</testCase>

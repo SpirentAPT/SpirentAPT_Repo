@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<SessionTemplate version="8.1.3.0">
+    <baseApplication>com.fnfr.svt.applications.spirent.testcenter.gui</baseApplication>
+    <sessionProperties type="com.fnfr.svt.adapter.automation.tools.common.documents.TransferableDocumentObject" transferableToolId="com.fnfr.svt.applications.spirent.testcenter.gui" transferableType="com.fnfr.itest.applications.spirent.testcenter.properties.TestCenterGUISessionProperties" config="project://APT_iTest/configuration/STCv_Router_OSPF_Traffic_Testing.xml" config.inherit="false" forceOwnership="true" forceOwnership.inherit="false" verifyPortBeforeReserve="true" verifyPortBeforeReserve.inherit="false">
+        <tcl transferableToolId="com.fnfr.svt.applications.spirent.testcenter.gui" transferableType="com.fnfr.itest.applications.spirent.testcenter.properties.TclInterpreterProperties" interpreterLocation="file:/C:/Tcl/bin/tclsh.exe" interpreterLocation.inherit="false" testcenterTclAPIDir="file:/C:/Program%20Files%20(x86)/Spirent%20Communications/Spirent%20TestCenter%204.95/Spirent%20TestCenter%20Application/" testcenterTclAPIDir.inherit="false"/>
+        <configureCustom16bitFilter transferableToolId="com.fnfr.svt.applications.spirent.testcenter.gui" transferableType="com.fnfr.itest.applications.spirent.testcenter.properties.Analyzer16BitFilterProperties" mask="ffff" mask.inherit="false" endOfRange="ffff" endOfRange.inherit="false"/>
+    </sessionProperties>
+    <responseLibrary inherit="false">project://APT_iTest/</responseLibrary>
+    <formMapLibrary inherit="false">project://APT_iTest/</formMapLibrary>
+</SessionTemplate>

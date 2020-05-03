@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<ParameterTree version="8.1.3.0">
+    <parameters escape="true">
+        <parameters xmlns:pt="http://www.fnfr.com/schemas/parameterTree">
+            <apt_server>10.62.224.2</apt_server>
+            <esxi_sales>10.62.224.70</esxi_sales>
+            <CyberFlood>10.62.224.3</CyberFlood>
+            <user>root</user>
+            <router_ip>10.62.224.201</router_ip>
+            <SW_Version>03.11.02.S</SW_Version>
+        </parameters>
+    </parameters>
+</ParameterTree>
