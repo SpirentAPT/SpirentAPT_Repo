@@ -139,7 +139,7 @@
                                         <actionsWhenFalse>
                                             <item actionId="DeclareExecutionIssue">
                                                 <actionProperties type="com.fnfr.svt.execution.builtin.actions.ExecutionIssuePropertyGroup">
-                                                    <message>Cyber Flood Server Health Check FAILED</message>
+                                                    <message>Cyber Flood Server Health Check FAILED, since Ping test failed</message>
                                                 </actionProperties>
                                             </item>
                                             <item actionId="FailTest">
