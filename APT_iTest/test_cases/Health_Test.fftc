@@ -25,7 +25,7 @@
                 </item>
                 <item guid="f1ec0f05-bd36-4360-a3d4-69a056380704" action="command" session="t1" normalOffset="6.565" estimatedStepExecutionTime="3.264">
                     <command>
-                        <body>ping 10.62.224.2</body>
+                        <body>ping [param apt_server]</body>
                     </command>
                     <postProcessing>
                         <analysisRules>
@@ -69,7 +69,7 @@
                 </item>
                 <item guid="9847a372-e573-4e46-9420-be8972c9e379" action="command" session="t1" normalOffset="11.815" estimatedStepExecutionTime="3.262">
                     <command>
-                        <body>ping 10.62.224.70</body>
+                        <body>ping [param esxi_sales]</body>
                     </command>
                     <postProcessing>
                         <analysisRules>
@@ -113,7 +113,7 @@
                 </item>
                 <item guid="4ddc3f41-4a8e-4652-b62b-75afd717ba85" action="command" session="t1" normalOffset="3.965" estimatedStepExecutionTime="3.312">
                     <command>
-                        <body>ping 10.62.224.70</body>
+                        <body>ping [param CyberFlood]</body>
                     </command>
                     <postProcessing>
                         <analysisRules>
